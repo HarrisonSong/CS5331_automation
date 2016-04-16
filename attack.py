@@ -3,7 +3,7 @@ class Attack(object):
     """A session_hijacking_attack object."""
     self.link = link
     self.form_parameter = form_parameter
-    self.button_name = button
+    self.button = button
     self.cookie = cookie
     self.type = type
 

@@ -1,0 +1,1 @@
+[{"form_parameter": [{"account": "username", "password": "password", "account_value": "scanner1", "password_value": "scanner1"}], "cookie": [{"attack": ["sessionFixation"], "name": "PHPSESSID", "httpOnly": false, "secure": false}], "button": ["login"], "link": ["https://app1.com/users/login.php"]}]

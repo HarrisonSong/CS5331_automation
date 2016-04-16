@@ -4,12 +4,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-class SessionFixationAttack(Attack):
+class PredictableCookieAttack(Attack):
   def __init__(self, link, form_parameter, button, cookie):
-    super(SessionFixationAttack, self).__init__(link, form_parameter, button, cookie, "session_fixation")
+    super(PredictableCookieAttack, self).__init__(link, form_parameter, button, cookie, "predictable_cookie")
 
   def perform(self):
-    print "start session_fixation_attack."
+    print "start predictable_cookie_attack."
     wd = webdriver.Chrome()
 
     wd.get(self.link[0])
