@@ -1,0 +1,50 @@
+ [
+  {
+    "link": [
+      "https://app1.com/admin/index.php?page=login"
+    ],
+    "form_parameter": [
+      {
+        "account": "adminname",
+        "account_value": "admin",
+        "password": "password",
+        "password_value": "admin"
+      }
+    ],
+    "button": [
+      "submit"
+    ],
+    "cookie": [
+      {
+        "name":"session",
+        "secure":false,
+        "httpOnly":false,
+        "attack": ["sessionHijacking ","predictableCookies"]
+      }
+    ]
+  },
+  {
+    "link": [
+      "https://app1.com/users/login.php"
+    ],
+    "form_parameter": [
+      {
+        "account": "username",
+        "account_value": "scanner1",
+        "password": "password",
+        "password_value": "scanner1"
+      }
+    ],
+    "button": [
+      "login"
+    ],
+        "cookie": [
+      {
+        "name":"PHPSESSION",
+        "secure":false,
+        "httpOnly":false,
+        "attack": ["sessionFixation"]
+      }
+    ]
+  }
+]
