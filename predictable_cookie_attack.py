@@ -10,9 +10,9 @@ class PredictableCookieAttack(Attack):
 
   def perform(self):
     print "start predictable_cookie_attack."
-    wd = webdriver.Chrome()
+    wd = webdriver.Firefox()
 
-    wd.get(self.link[0])
+    wd.get(self.link)
     wd.find_element_by_css_selector("input[name=" + self.form_parameter[0]["account"] + "]").send_keys(self.form_parameter[0]["account_value"])
     wd.find_element_by_css_selector("input[name=" + self.form_parameter[0]["password"] + "]").send_keys(self.form_parameter[0]["password_value"])
     wd.find_element_by_css_selector("input[value=" + self.button[0] + "]").click()

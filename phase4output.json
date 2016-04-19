@@ -1,0 +1,1 @@
+[{"cookie": [{"attack": "sessionFixation", "secure": false, "httpOnly": false}], "page": "https://app1.com/users/login.php"}]
