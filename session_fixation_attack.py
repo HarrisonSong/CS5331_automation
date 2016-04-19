@@ -52,7 +52,7 @@ class SessionFixationAttack(Attack):
                     "name": self.cookie["name"],
                     "secure": self.cookie["secure"],
                     "httpOnly": self.cookie["httpOnly"],
-                    "attack": "sessionFixation"
+                    "attack": ["sessionFixation"]
                 }]
             }
             self.phase4_output(exploit)
@@ -92,7 +92,7 @@ class SessionFixationAttack(Attack):
                             "name": self.cookie["name"],
                             "secure": self.cookie["secure"],
                             "httpOnly": self.cookie["httpOnly"],
-                            "attack": "sessionFixation"
+                            "attack": ["sessionFixation"]
                         }]
                     }
                     self.phase4_output(exploit)

@@ -8,3 +8,6 @@ detector = AttackCategoryDetector(data)
 
 for index, attack in enumerate(detector.get_attacks_list()):
   attack.perform()
+
+detector.process_output()
+

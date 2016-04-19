@@ -45,7 +45,7 @@ class PredictableCookieAttack(Attack):
                         "name": self.cookie["name"],
                         "secure": self.cookie["secure"],
                         "httpOnly": self.cookie["httpOnly"],
-                        "attack": "predictableCookie"
+                        "attack": ["predictableCookie"]
                     }]
                 }
                 self.phase4_output(exploit)
@@ -61,7 +61,7 @@ class PredictableCookieAttack(Attack):
                         "name": self.cookie["name"],
                         "secure": self.cookie["secure"],
                         "httpOnly": self.cookie["httpOnly"],
-                        "attack": "predictableCookie"
+                        "attack": ["predictableCookie"]
                     }]
                 }
                 self.phase4_output(exploit)

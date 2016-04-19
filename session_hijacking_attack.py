@@ -47,7 +47,7 @@ class SessionHijackingAttack(Attack):
                     "name": self.cookie["name"],
                     "secure": self.cookie["secure"],
                     "httpOnly": self.cookie["httpOnly"],
-                    "attack": "sessionHijacking"
+                    "attack": ["sessionHijacking"]
                 }]
             }
             self.phase4_output(exploit)
