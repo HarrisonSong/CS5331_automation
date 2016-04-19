@@ -1,28 +1,86 @@
 from attack import Attack
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
+import subprocess
+import time
+import json
+import os
 
 class PredictableCookieAttack(Attack):
-  def __init__(self, link, form_parameter, button, cookie):
-    super(PredictableCookieAttack, self).__init__(link, form_parameter, button, cookie, "predictable_cookie")
+    def __init__(self, link, form_parameter, button, cookie):
+        super(PredictableCookieAttack, self).__init__(link, form_parameter, button, cookie, "predictable_cookie")
 
-  def perform(self):
-    print "start predictable_cookie_attack."
-    wd = webdriver.Firefox()
+    def perform(self):
+        print "start predictable_cookie_attack."
+        print "=============== TRY: session predictable cookie attack ========================"
+        wd = webdriver.Firefox()
+        wd.get(self.link)
+        wd.find_element_by_xpath("//input[@name='" + self.form_parameter["account"] + "']").send_keys(self.form_parameter["account_value"])
+        wd.find_element_by_xpath("//input[@name='" + self.form_parameter["password"] + "']").send_keys(self.form_parameter["password_value"])
+        wd.find_element_by_xpath("//input[@value='" + self.button + "']").click()
+        first_cookie = ""
+        for cookie in wd.get_cookies():
+            if cookie["name"] == self.cookie["name"]:
+                first_cookie = cookie["value"]
+                break
+        print "first cookie is %s" % first_cookie
+        wd.close()
+        wd = webdriver.Firefox()
+        wd.get(self.link)
+        wd.find_element_by_xpath("//input[@name='" + self.form_parameter["account"] + "']").send_keys(self.form_parameter["account_value"])
+        wd.find_element_by_xpath("//input[@name='" + self.form_parameter["password"] + "']").send_keys(self.form_parameter["password_value"])
+        wd.find_element_by_xpath("//input[@value='" + self.button + "']").click()
+        second_cookie = ""
+        for cookie in wd.get_cookies():
+            if cookie["name"] == self.cookie["name"]:
+                second_cookie = cookie["value"]
+                break
+        print "second cookie is %s" % second_cookie
+        wd.close()
+        if "increment" in self.cookie:
+            if int(second_cookie) == int(first_cookie) + int(self.cookie["increment"]):
+                exploit = {
+                    "page": self.link,
+                    "cookie": [{
+                        "name": self.cookie["name"],
+                        "secure": self.cookie["secure"],
+                        "httpOnly": self.cookie["httpOnly"],
+                        "attack": "predictableCookie"
+                    }]
+                }
+                self.phase4_output(exploit)
+                print "CONFIRMED: increment predictable cookie attack successful."
+            else:
+                print "CONFIRMED: not a valid increment predictable cookie issue."
+        elif "constant":
+            if second_cookie == first_cookie:
+                print "CONFIRMED: constant predictable cookie attack successful."
+                exploit = {
+                    "page": self.link,
+                    "cookie": [{
+                        "name": self.cookie["name"],
+                        "secure": self.cookie["secure"],
+                        "httpOnly": self.cookie["httpOnly"],
+                        "attack": "predictableCookie"
+                    }]
+                }
+                self.phase4_output(exploit)
+            else:
+                print "CONFIRMED: not a valid constant predictable cookie issue."
+        else:
+            print "CONFIRMED: not a recognizable predictable cookie issue."
 
-    wd.get(self.link)
-    wd.find_element_by_css_selector("input[name=" + self.form_parameter[0]["account"] + "]").send_keys(self.form_parameter[0]["account_value"])
-    wd.find_element_by_css_selector("input[name=" + self.form_parameter[0]["password"] + "]").send_keys(self.form_parameter[0]["password_value"])
-    wd.find_element_by_css_selector("input[value=" + self.button[0] + "]").click()
-    fixed_cookie = ""
-    for cookie in wd.get_cookies():
-        if cookie["name"] == self.cookie[0]["name"]:
-            fixed_cookie = cookie["value"]
-            break
-    print fixed_cookie
-
-    WebDriverWait(wd, 10).until(
-        EC.presence_of_element_located((By.ID, "myDynamicElement"))
-    )
+    def phase4_output(self, source):
+        try:
+            if os.stat("phase4output.json").st_size > 0:
+                with open('phase4output.json') as f:
+                    data = json.load(f)
+                data.append(source)
+                with open('phase4output.json', 'w') as f:
+                    json.dump(data, f)
+            else:
+                with open('phase4output.json', 'w') as f:
+                    json.dump([source], f)
+        except OSError:
+            with open('phase4output.json', 'w+') as f:
+                json.dump([source], f)

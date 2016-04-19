@@ -7,5 +7,4 @@ data = json.loads(json_string)
 detector = AttackCategoryDetector(data)
 
 for index, attack in enumerate(detector.get_attacks_list()):
-  if attack.type == "session_fixation" or attack.type == "session_hijacking":
-    attack.perform()
+  attack.perform()
