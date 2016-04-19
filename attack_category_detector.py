@@ -8,12 +8,12 @@ class AttackCategoryDetector(object):
     """Return a Attack_category_detector object."""
     self.attacks_list = []
     for index, attack in enumerate(attack_specs):
-      if attack["cookie"]["attack"][0].strip() == "sessionFixation":
+      if attack["cookie"]["attack"].strip() == "sessionFixation":
         self.attacks_list.append(SessionFixationAttack(attack["link"], attack["form_parameter"], attack["button"], attack["cookie"]))
-      elif attack["cookie"]["attack"][0].strip() == "sessionHijacking":
+      elif attack["cookie"]["attack"].strip() == "sessionHijacking":
         self.attacks_list.append(SessionHijackingAttack(attack["link"], attack["form_parameter"], attack["button"], attack["cookie"]))
-      elif attack["cookie"]["attack"][0].strip() == "predictableCookie":
-        self.attacks_list.append(PredictableCookieAttack(attack["link"], attack["form_parameter"], attack["button"], attack["cookie"], "predictableCookies"))
+      elif attack["cookie"]["attack"].strip() == "predictableCookie":
+        self.attacks_list.append(PredictableCookieAttack(attack["link"], attack["form_parameter"], attack["button"], attack["cookie"]))
 
   def get_attacks_list(self):
     return self.attacks_list
