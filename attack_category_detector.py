@@ -10,6 +10,8 @@ class AttackCategoryDetector(object):
     """Return a Attack_category_detector object."""
     self.attacks_list = []
     for index, attack in enumerate(attack_specs):
+      if not "button" in attack:
+        attack["button"] = '//form//a[@class="button"]'
       if attack["cookie"]["attack"].strip() == "sessionFixation":
         self.attacks_list.append(SessionFixationAttack(attack["link"], attack["form_parameter"], attack["button"], attack["cookie"]))
       elif attack["cookie"]["attack"].strip() == "sessionHijacking":

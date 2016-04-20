@@ -1,0 +1,1 @@
+[{"form_parameter": {"account": "username", "password": "password", "account_value": "admin", "password_value": "admin"}, "cookie": {"attack": "sessionHijacking", "name": "PHPSESSID", "httpOnly": false, "secure": false}, "link": "https://app8.com/upload/admin/"}]

