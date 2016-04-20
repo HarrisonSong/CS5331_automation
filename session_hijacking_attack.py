@@ -10,7 +10,7 @@ class SessionHijackingAttack(Attack):
     def __init__(self, link, form_parameter, button, cookie):
         super(SessionHijackingAttack, self).__init__(link, form_parameter, button, cookie, "session_hijacking")
 
-    def perform(self):
+    def perform(self, output_path):
         print "start session_hijacking_attack."
         print "=============== TRY: session hijacking attack ========================"
         profile = webdriver.FirefoxProfile()
@@ -57,7 +57,7 @@ class SessionHijackingAttack(Attack):
                         "attack": ["sessionHijacking"]
                     }]
                 }
-                self.phase4_output(exploit)
+                self.phase4_output(exploit, output_path)
             else:
                 print "CONFIRMED: session hijacking attack failed."
         except NoSuchElementException:
@@ -68,17 +68,17 @@ class SessionHijackingAttack(Attack):
         subprocess.Popen("rm tmp_cookie_value.txt", shell=True)
         wd.close()
 
-    def phase4_output(self, source):
+    def phase4_output(self, source, output_path):
         try:
-            if os.stat("phase4output.json").st_size > 0:
-                with open('phase4output.json') as f:
+            if os.stat(output_path).st_size > 0:
+                with open(output_path) as f:
                     data = json.load(f)
                 data.append(source)
-                with open('phase4output.json', 'w') as f:
+                with open(output_path, 'w') as f:
                     json.dump(data, f)
             else:
-                with open('phase4output.json', 'w') as f:
+                with open(output_path, 'w') as f:
                     json.dump([source], f)
         except OSError:
-            with open('phase4output.json', 'w+') as f:
+            with open(output_path, 'w+') as f:
                 json.dump([source], f)

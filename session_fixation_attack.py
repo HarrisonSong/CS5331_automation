@@ -10,7 +10,7 @@ class SessionFixationAttack(Attack):
     def __init__(self, link, form_parameter, button, cookie):
         super(SessionFixationAttack, self).__init__(link, form_parameter, button, cookie, "session_fixation")
 
-    def perform(self):
+    def perform(self, output_path):
         print "start session_fixation_attack."
         print "=============== TRY: client side fixation attack ========================"
         profile = webdriver.FirefoxProfile()
@@ -63,7 +63,7 @@ class SessionFixationAttack(Attack):
                         "attack": ["sessionFixation"]
                     }]
                 }
-                self.phase4_output(exploit)
+                self.phase4_output(exploit, output_path)
             else :
                 print "CONFIRMED: login unsucessfully. client side fixation attack failed."
                 proceed_to_server_side_fixation_attack = True
@@ -113,7 +113,7 @@ class SessionFixationAttack(Attack):
                                 "attack": ["sessionFixation"]
                             }]
                         }
-                        self.phase4_output(exploit)
+                        self.phase4_output(exploit, output_path)
                     else:
                         print "CONFIRMED: server side fixation attack failed."
                 except NoSuchElementException:
@@ -122,19 +122,19 @@ class SessionFixationAttack(Attack):
                 print "=============== CONFIRMED: not a valid fixation issue ========================"
             wd.close()
 
-    def phase4_output(self, source):
+    def phase4_output(self, source, output_path):
         try:
-            if os.stat("phase4output.json").st_size > 0:
-                with open('phase4output.json') as f:
+            if os.stat(output_path).st_size > 0:
+                with open(output_path) as f:
                     data = json.load(f)
                 data.append(source)
-                with open('phase4output.json', 'w') as f:
+                with open(output_path, 'w') as f:
                     json.dump(data, f)
             else:
-                with open('phase4output.json', 'w') as f:
+                with open(output_path, 'w') as f:
                     json.dump([source], f)
         except OSError:
-            with open('phase4output.json', 'w+') as f:
+            with open(output_path, 'w+') as f:
                 json.dump([source], f)
 
 

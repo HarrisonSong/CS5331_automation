@@ -3,20 +3,6 @@ import os.path
 
 def request(context, flow):
   print "request header is %s" % flow.request.headers
-  # if os.path.isfile("tmp_cookie.txt") :
-  #   with open('tmp_cookie.txt', 'r') as f:
-  #     cookie_name = f.read()
-  #   print "COOKIE NAME IS %s" % cookie_name
-  #   if "Cookie" in flow.request.headers :
-  #     cookie = Cookie.SimpleCookie(flow.request.headers["Cookie"])
-  #   else :
-  #     cookie = Cookie.SimpleCookie()
-  #   cookie[cookie_name] = "123"
-  #   print "updated request cookie is: %s" % cookie.output()
-  #   flow.request.headers["Set-Cookie"] = cookie.output().replace("Set-Cookie:", "").strip()
-  #   print("final updated request header: %s" % (flow.request.headers))
-  # else :
-  #   print "No specific cookie need to investigate"
 
 def response(context, flow):
   print "response header is %s" % flow.response.headers

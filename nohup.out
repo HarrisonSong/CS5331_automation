@@ -1,0 +1,244 @@
+127.0.0.1:61261: clientconnect
+127.0.0.1:61261: TLS verification failed for upstream server at depth 0 with error: 20
+127.0.0.1:61261: Ignoring server verification error, continuing with connection
+host: app1.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+COOKIE NAME IS session
+127.0.0.1 GET https://app1.com/admin/index.php?page=login
+ << 500 Internal Server Error 266B
+127.0.0.1:61261: clientdisconnect
+127.0.0.1:61263: clientconnect
+127.0.0.1:61263: TLS verification failed for upstream server at depth 0 with error: 20
+127.0.0.1:61263: Ignoring server verification error, continuing with connection
+Script error:
+'session'
+host: app1.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Cookie: PHPSESSID=f64qs9foeugneldsrggg9ce8t1
+Connection: keep-alive
+
+COOKIE NAME IS session
+127.0.0.1 GET https://app1.com/favicon.ico
+ << 404 Not Found 283B
+Script error:
+'session'
+host: app1.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Cookie: PHPSESSID=f64qs9foeugneldsrggg9ce8t1
+Connection: keep-alive
+
+COOKIE NAME IS session
+127.0.0.1 GET https://app1.com/favicon.ico
+ << 404 Not Found 283B
+Script error:
+'session'
+host: app1.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://app1.com/admin/index.php?page=login
+Cookie: PHPSESSID=f64qs9foeugneldsrggg9ce8t1
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 30
+
+COOKIE NAME IS session
+127.0.0.1:61271: clientconnect
+127.0.0.1 POST https://app1.com/admin/index.php?page=login
+ << 303 See Other 0B
+host: app1.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://app1.com/admin/index.php?page=login
+Cookie: session=142; PHPSESSID=f64qs9foeugneldsrggg9ce8t1
+Connection: keep-alive
+
+COOKIE NAME IS session
+request cookie is: 142
+127.0.0.1 GET https://app1.com/admin/index.php?page=home
+ << 500 Internal Server Error 116B
+127.0.0.1:61263: clientdisconnect
+host: shavar.services.mozilla.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Content-Length: 53
+Content-Type: text/plain
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+
+COOKIE NAME IS session
+127.0.0.1 POST https://shavar.services.mozilla.com/downloads?client=navclient-auto-ffox&appver=45.0.2&pver=2.2
+ << 200 OK 211B
+127.0.0.1:61273: clientconnect
+host: tracking-protection.cdn.mozilla.net
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+
+COOKIE NAME IS session
+127.0.0.1 GET https://tracking-protection.cdn.mozilla.net/mozstd-track-digest256/1458772625
+ << 200 OK 53.71kB
+host: tracking-protection.cdn.mozilla.net
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+
+COOKIE NAME IS session
+127.0.0.1 GET https://tracking-protection.cdn.mozilla.net/mozstd-trackwhite-digest256/1458772625
+ << 200 OK 302.46kB
+127.0.0.1:61277: clientconnect
+host: aus5.mozilla.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Pragma: no-cache
+Connection: keep-alive
+
+COOKIE NAME IS session
+127.0.0.1 GET https://aus5.mozilla.org/update/3/GMP/45.0.2/20160407164938/Darwin_x86_64-gcc3-u-i386-x86_64/en-US/release/Darwin%2015.4.0/default/default/update.xml
+ << 200 OK 401B
+127.0.0.1:61277: clientdisconnect
+127.0.0.1:61273: clientdisconnect
+127.0.0.1:61271: clientdisconnect
+127.0.0.1:61292: clientconnect
+127.0.0.1:61292: TLS verification failed for upstream server at depth 0 with error: 20
+127.0.0.1:61292: Ignoring server verification error, continuing with connection
+host: app1.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+COOKIE NAME IS session
+127.0.0.1 GET https://app1.com/admin/index.php?page=login
+ << 500 Internal Server Error 266B
+127.0.0.1:61292: clientdisconnect
+127.0.0.1:61294: clientconnect
+127.0.0.1:61294: TLS verification failed for upstream server at depth 0 with error: 20
+127.0.0.1:61294: Ignoring server verification error, continuing with connection
+Script error:
+'session'
+host: app1.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Cookie: PHPSESSID=le00agfmrk4q5uq67ri5n7u8g5
+Connection: keep-alive
+
+COOKIE NAME IS session
+127.0.0.1 GET https://app1.com/favicon.ico
+ << 404 Not Found 283B
+Script error:
+'session'
+host: app1.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Cookie: PHPSESSID=le00agfmrk4q5uq67ri5n7u8g5
+Connection: keep-alive
+
+COOKIE NAME IS session
+127.0.0.1 GET https://app1.com/favicon.ico
+ << 404 Not Found 283B
+127.0.0.1:61300: clientconnect
+Script error:
+'session'
+host: app1.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://app1.com/admin/index.php?page=login
+Cookie: PHPSESSID=le00agfmrk4q5uq67ri5n7u8g5
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 30
+
+COOKIE NAME IS session
+127.0.0.1 POST https://app1.com/admin/index.php?page=login
+ << 303 See Other 0B
+host: app1.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://app1.com/admin/index.php?page=login
+Cookie: session=143; PHPSESSID=le00agfmrk4q5uq67ri5n7u8g5
+Connection: keep-alive
+
+COOKIE NAME IS session
+request cookie is: 143
+127.0.0.1 GET https://app1.com/admin/index.php?page=home
+ << 500 Internal Server Error 116B
+127.0.0.1:61294: clientdisconnect
+host: shavar.services.mozilla.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Content-Length: 53
+Content-Type: text/plain
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+
+COOKIE NAME IS session
+127.0.0.1 POST https://shavar.services.mozilla.com/downloads?client=navclient-auto-ffox&appver=45.0.2&pver=2.2
+ << 200 OK 211B
+127.0.0.1:61304: clientconnect
+host: tracking-protection.cdn.mozilla.net
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+
+COOKIE NAME IS session
+127.0.0.1 GET https://tracking-protection.cdn.mozilla.net/mozstd-track-digest256/1458772625
+ << 200 OK 53.71kB
+host: tracking-protection.cdn.mozilla.net
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.75.14 (KHTML, like Gecko) Version/7.0.3 Safari/7046A194A
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+
+COOKIE NAME IS session
+127.0.0.1 GET https://tracking-protection.cdn.mozilla.net/mozstd-trackwhite-digest256/1458772625
+ << 200 OK 302.46kB
+127.0.0.1:61300: clientdisconnect
+127.0.0.1:61304: clientdisconnect

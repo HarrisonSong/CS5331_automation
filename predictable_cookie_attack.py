@@ -10,7 +10,7 @@ class PredictableCookieAttack(Attack):
     def __init__(self, link, form_parameter, button, cookie):
         super(PredictableCookieAttack, self).__init__(link, form_parameter, button, cookie, "predictable_cookie")
 
-    def perform(self):
+    def perform(self, output_path):
         print "start predictable_cookie_attack."
         print "=============== TRY: session predictable cookie attack ========================"
         wd = webdriver.Firefox()
@@ -62,7 +62,7 @@ class PredictableCookieAttack(Attack):
                             "attack": ["predictableCookie"]
                         }]
                     }
-                    self.phase4_output(exploit)
+                    self.phase4_output(exploit, output_path)
                     print "CONFIRMED: increment predictable cookie attack successful."
                 else:
                     print "CONFIRMED: not a valid increment predictable cookie issue."
@@ -78,7 +78,7 @@ class PredictableCookieAttack(Attack):
                             "attack": ["predictableCookie"]
                         }]
                     }
-                    self.phase4_output(exploit)
+                    self.phase4_output(exploit, output_path)
                 else:
                     print "CONFIRMED: not a valid constant predictable cookie issue."
             else:
@@ -86,17 +86,17 @@ class PredictableCookieAttack(Attack):
         except NoSuchElementException:
             print "ERROR: not a recognizable predictable cookie issue."
 
-    def phase4_output(self, source):
+    def phase4_output(self, source, output_path):
         try:
-            if os.stat("phase4output.json").st_size > 0:
-                with open('phase4output.json') as f:
+            if os.stat(output_path).st_size > 0:
+                with open(output_path) as f:
                     data = json.load(f)
                 data.append(source)
-                with open('phase4output.json', 'w') as f:
+                with open(output_path, 'w') as f:
                     json.dump(data, f)
             else:
-                with open('phase4output.json', 'w') as f:
+                with open(output_path, 'w') as f:
                     json.dump([source], f)
         except OSError:
-            with open('phase4output.json', 'w+') as f:
+            with open(output_path, 'w+') as f:
                 json.dump([source], f)

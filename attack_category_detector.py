@@ -22,9 +22,9 @@ class AttackCategoryDetector(object):
   def get_attacks_list(self):
     return self.attacks_list
 
-  def process_output(self):
-    if os.path.isfile("phase4output.json"):
-      with open('phase4output.json') as f:
+  def process_output(self, output_path):
+    if os.path.isfile(output_path):
+      with open(output_path) as f:
         original = json.load(f)
       updated = []
       for item in original:
@@ -43,7 +43,7 @@ class AttackCategoryDetector(object):
             break
         if not found_page :
           updated.append(item)
-      with open('phase4output.json', "w") as f:
+      with open(output_path, "w") as f:
         json.dump(updated, f)
 
 
